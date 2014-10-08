@@ -7,9 +7,9 @@ usage: $0 options
 This script checks for imaging sequences that were run multiple times.
 
 OPTIONS:
-        -h      Show this message
-        -N              Full path to your raw NIfTI directory (will be created by this script if it doesn't already exist)
-        -D              Full path to DICOM directory (This is where you had IDAGet send your files)
+  -h  Show this message
+  -N  Full path to your raw NIfTI directory (will be created by this script if it doesn't already exist)
+  -D  Full path to DICOM directory (This is where you had IDAGet send your files)
    
 EOF
 }
@@ -18,24 +18,23 @@ NIFTIDIR=
 DCMDIR=
 
 #Read arguments entered by user
-while getopts "hN:D:" OPTION
-do
-        case $OPTION in
-                h)
-                        usage
-                        exit 1
-                        ;;
-                N)
-                        NIFTIDIR=$OPTARG
-                        ;;
-                D)
-                        DCMDIR=$OPTARG
-                        ;;
-                ?)
-                        usage
-                        exit
-                        ;;
-        esac
+while getopts "hN:D:" OPTION; do
+  case $OPTION in
+    h)
+      usage
+      exit 1
+      ;;
+    N)
+      NIFTIDIR=$OPTARG
+      ;;
+    D)
+      DCMDIR=$OPTARG
+      ;;
+    ?)
+      usage
+      exit
+      ;;
+  esac
 done
 
 #Create a timestamp
@@ -57,6 +56,7 @@ ls | grep "IDAGet_[0-9]*.output" | while read -r line; do
   done
 
 cd $NIFTIDIR
+
 #Extract number of duplications for each item
 sed 's/^ *//g' "duplicates_${NOW}_tmp.txt" | awk 'BEGIN {print "No.Runs";} {print $1}' >> "dups_tmp.txt"
 
