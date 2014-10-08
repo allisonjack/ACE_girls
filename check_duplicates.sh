@@ -7,7 +7,7 @@ usage: $0 options
 This script checks for imaging sequences that were run multiple times.
 
 OPTIONS:
-        -h              Show this message
+        -h      Show this message
         -N              Full path to your raw NIfTI directory (will be created by this script if it doesn't already exist)
         -D              Full path to DICOM directory (This is where you had IDAGet send your files)
    
