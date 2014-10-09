@@ -65,6 +65,8 @@ NIFTI=$(ls | head -1 | sed 's/_*br_raw_[0-9]*_[0-9]*.dcm//g' \
 | sed 's/_MR_BOLD_-//g' \
 | sed 's/_*[0-9]*$//g' \
 | sed 's/_MR_T2-AX__In-plane_Structural/_T2Ax/g' \
+| sed 's/Social_Reward/Reward/g' \
+| sed 's/Resting_State/Rest/g' \
 | sed 's/_MR_localizer/_localizer/g' \
 | sed 's/_MR_trufi_localizer_3-plane/_localizer/g' \
 | sed 's/_MR_MPRAGE_-_BWM/_MPRAGE/g')
