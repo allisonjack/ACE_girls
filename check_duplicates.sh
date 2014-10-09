@@ -76,6 +76,7 @@ awk 'NR == 1; NR > 1 {print $0 | "sort -nr"}' "duplicates_${NOW}_tmp3.txt" | uni
 #Print a file listing the IDs that were processed
 sort IDs_main_tmp.txt | uniq >> "IDs_${NOW}.txt"
 
+#Print a three-column file with info on ID, paradigm, and series number
 printf "ID  Paradigm  Series\n" >> "ID_paradigm_series_${NOW}.txt"
 cat IDs_${NOW}.txt | while read ID; do
   ls $ID | grep "nii.gz" | sed 's/ACE_//g' \
