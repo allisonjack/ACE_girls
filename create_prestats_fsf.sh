@@ -21,15 +21,6 @@ OPTIONS:
 EOF
 }
 
-INPUTFSF=
-UPDATEFSF=
-DATA=
-OUTPUT=
-VOLUMES=
-INITIALSX=
-MAINSX=
-STANDARD=
-
 while getopts "hf:u:d:o:v:i:m:s:" OPTION
 do
   case $OPTION in
