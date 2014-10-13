@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pipeline version=".2">
+        <connections>
+                <connection source="Rawfunctionalfile_1.Output" sink="rmsdiff_1.Rawfunctional" />
+                <connection source="Outputdirectory_1.Output" sink="rmsdiff_1.Outputdirectory" />
+                <connection source="IDlist_1.Output" sink="rmsdiff_1.ID" />
+                <connection source="Numberofvolumes_1.Output" sink="rmsdiff_1.Numberofvolumes" />
+                <connection source="Nlist_1.Output" sink="rmsdiff_1.Nlist" />
+                <connection source="Nminuslist_1.Output" sink="rmsdiff_1.Nminuslist" />
+                <connection source="runmcflirt_1.Flowcontrol" sink="rmsdiff_1.Flowcontrol" />
+                <connection source="Rawfunctionalfile_1.Output" sink="runmcflirt_1.Input" />
+        </connections>
+        <moduleGroup id="rsmdiff_before_prestats_1" name="rsmdiff_before_prestats" posX="0" posY="0" sourceCode="">
+                <module id="rmsdiff_1" name="rmsdiff" description="This script uses the FSL rmsdiff tool to calculate:&#xA;&#xA;1) absolute motion relative to refvol (in mm)&#xA;2) motion relative to previous volume (in mm)" posX="369" posY="366" sourceCode="" location="pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_BIOPOINT/SCRIPTS/rmsdiff_b4_prestats.sh">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Tue Jun 10 12:51:24 EDT 2014" />
+                        </metadata>
+                        <input id="rmsdiff_1.Rawfunctional" name="Raw functional" required="true" enabled="true" order="1" prefix="-F" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Nii Gz" extension="nii.gz" description="Compressed Nifti" />
+                                        </fileTypes>
+                                </format>
+                        </input>
+                        <input id="rmsdiff_1.Outputdirectory" name="Output directory" required="true" enabled="true" order="4" prefix="-O" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="String" cardinality="1" />
+                        </input>
+                        <input id="rmsdiff_1.ID" name="ID" required="true" enabled="true" order="2" prefix="-I" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="String" cardinality="1" />
+                        </input>
+                        <input id="rmsdiff_1.Numberofvolumes" name="Number of volumes" required="true" enabled="true" order="3" prefix="-V" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="Number" cardinality="1" />
+                        </input>
+                        <input id="rmsdiff_1.Nlist" name="Nlist" required="true" enabled="true" order="5" prefix="-N" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Text file" extension="txt" description="Text file" />
+                                        </fileTypes>
+                                </format>
+                        </input>
+                        <input id="rmsdiff_1.Nminuslist" name="Nminuslist" required="true" enabled="true" order="6" prefix="-M" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Text file" extension="txt" description="Text file" />
+                                        </fileTypes>
+                                </format>
+                        </input>
+                        <input id="rmsdiff_1.Flowcontrol" name="Flow control" required="false" enabled="true" order="0">
+                                <format type="Flow Control" cardinality="1" />
+                        </input>
+                </module>
+                <dataModule id="IDlist_1" name="ID list" posX="313" posY="64" sourceCode="" type="String" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <metadata>
+                                <data key="__creationDateKey" value="Wed Jun 11 09:54:43 EDT 2014" />
+                        </metadata>
+                        <output id="IDlist_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="String" cardinality="1" />
+                        </output>
+                        <values>
+                                <value>70103</value>
+                                <value>YAL494504</value>
+                        </values>
+                </dataModule>
+                <dataModule id="Rawfunctionalfile_1" name="Raw functional file" posX="237" posY="10" sourceCode="" type="File" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Wed Jun 11 09:52:28 EDT 2014" />
+                        </metadata>
+                        <output id="Rawfunctionalfile_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Nii Gz" extension="nii.gz" description="Compressed Nifti" />
+                                        </fileTypes>
+                                </format>
+                        </output>
+                        <fileTypes>
+                                <filetype name="Nii Gz" extension="nii.gz" description="Compressed Nifti" />
+                        </fileTypes>
+                        <values>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/NIFTI_test/70103/ACE_70103_Faces_srs9.nii.gz</value>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/NIFTI_test/YAL494504/ACE_YAL494504_Faces_srs5.nii.gz</value>
+                        </values>
+                </dataModule>
+                <dataModule id="Outputdirectory_1" name="Output directory" posX="428" posY="143" sourceCode="" type="String" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Wed Jun 11 09:55:16 EDT 2014" />
+                        </metadata>
+                        <output id="Outputdirectory_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="String" cardinality="1" />
+                        </output>
+                        <values>
+                                <value>/ifshome/ajack/ACE_ALL/ANALYSIS/INDIV_DIFF_test/70103</value>
+                                <value>/ifshome/ajack/ACE_ALL/ANALYSIS/INDIV_DIFF_test/YAL494504</value>
+                        </values>
+                </dataModule>
+                <dataModule id="Numberofvolumes_1" name="Number of volumes" posX="375" posY="100" sourceCode="" type="Number" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <metadata>
+                                <data key="__creationDateKey" value="Tue Aug 05 11:40:26 EDT 2014" />
+                        </metadata>
+                        <output id="Numberofvolumes_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="Number" cardinality="1" />
+                        </output>
+                        <values>
+                                <value>172</value>
+                        </values>
+                </dataModule>
+                <dataModule id="Nlist_1" name="Nlist" posX="677" posY="77" sourceCode="" type="File" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <metadata>
+                                <data key="__creationDateKey" value="Fri Sep 05 10:50:22 EDT 2014" />
+                        </metadata>
+                        <output id="Nlist_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Text file" extension="txt" description="Text file" />
+                                        </fileTypes>
+                                </format>
+                        </output>
+                        <fileTypes>
+                                <filetype name="Text file" extension="txt" description="Text file" />
+                        </fileTypes>
+                        <values>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/TEMPLATES/mat_N.txt</value>
+                        </values>
+                </dataModule>
+                <dataModule id="Nminuslist_1" name="Nminuslist" posX="721" posY="139" sourceCode="" type="File" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Fri Sep 05 10:50:22 EDT 2014" />
+                        </metadata>
+                        <output id="Nminuslist_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Text file" extension="txt" description="Text file" />
+                                        </fileTypes>
+                                </format>
+                        </output>
+                        <fileTypes>
+                                <filetype name="Text file" extension="txt" description="Text file" />
+                        </fileTypes>
+                        <values>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/TEMPLATES/mat_N-1.txt</value>
+                        </values>
+                </dataModule>
+                <module id="runmcflirt_1" name="run mcflirt" posX="76" posY="171" sourceCode="" location="pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_BIOPOINT/SCRIPTS/mcflirt_script.sh">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Mon Aug 04 18:05:07 EDT 2014" />
+                        </metadata>
+                        <input id="runmcflirt_1.Input" name="Input" required="false" enabled="true" order="0" prefix="-i" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="NIFTI GZ" extension="nii.gz" description="Gzipped NIFTI file." />
+                                        </fileTypes>
+                                </format>
+                        </input>
+                        <output id="runmcflirt_1.Flowcontrol" name="Flow control" required="false" enabled="true" order="1">
+                                <format type="Flow Control" cardinality="1" />
+                        </output>
+                </module>
+        </moduleGroup>
+</pipeline>
+
