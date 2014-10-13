@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pipeline version=".2">
+        <connections>
+                <connection source="Raw4dimage_1.Output" sink="motion_outliers_1.Input" />
+                <connection source="Outputdirectory_1.Output" sink="motion_outliers_1.Output" />
+                <connection source="IDlist_1.Output" sink="motion_outliers_1.Subject" />
+                <connection source="motion_outliers_1.Flowcontrol1" sink="outlier_count_1.Flowcontrol" />
+                <connection source="Outputdirectory_1.Output" sink="outlier_count_1.Outputdirectory" />
+                <connection source="motion_outliers_1.Flowcontrol1" sink="prep_confound_evs_1.Flowcontrol" />
+                <connection source="Motionparameters.parfile_1.Output" sink="prep_confound_evs_1.Parameterfile" />
+                <connection source="IDlist_1.Output" sink="prep_confound_evs_1.Subjectlist" />
+                <connection source="Outputdirectory_1.Output" sink="prep_confound_evs_1.Outputdirectory" />
+        </connections>
+        <moduleGroup id="MO_test_1" name="MO_test" posX="0" posY="0" sourceCode="">
+                <dataModule id="Raw4dimage_1" name="Raw 4d image" posX="432" posY="215" sourceCode="" type="File" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Wed Apr 23 15:35:15 EDT 2014" />
+                        </metadata>
+                        <output id="Raw4dimage_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Nii Gz" extension="nii.gz" description="Compressed Nifti" />
+                                        </fileTypes>
+                                </format>
+                        </output>
+                        <fileTypes>
+                                <filetype name="Nii Gz" extension="nii.gz" description="Compressed Nifti" />
+                        </fileTypes>
+                        <values>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/NIFTI_test/70103/ACE_70103_Faces_srs9.nii.gz</value>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/NIFTI_test/YAL494504/ACE_YAL494504_Faces_srs5.nii.gz</value>
+                        </values>
+                </dataModule>
+                <module id="motion_outliers_1" name="motion_outliers" description="The tool fsl_motion_outliers is designed to detect timepoints in an fMRI dataset that have been corrupted by large motion. It creates a confound matrix that can be used in the GLM to completely remove the effects of these timepoints on the analysis, without any adverse affects in the statistics. This is intended to deal with the effects of intermediate to large motions, which corrupt images beyond anything that the linear motion parameter regression methods can fix.&#xA;&#xA;It is strongly advised that &quot;removal&quot; of timepoints is only ever done using confound matrices, such as output by this script, as if timepoints are deleted then parts of the analysis are adversely affected, particularly the temporal filtering and autocorrelation estimation. " posX="256" posY="315" sourceCode="" location="pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_BIOPOINT/SCRIPTS/motion_outliers_pipeline.sh">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Wed Apr 23 15:24:28 EDT 2014" />
+                        </metadata>
+                        <input id="motion_outliers_1.Input" name="Input" description="Input 4D image (unfiltered, non-motion-corrected)" required="true" enabled="true" order="2" prefix="-i" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="NIFTI GZ" extension="nii.gz" description="Gzipped NIFTI file." />
+                                        </fileTypes>
+                                </format>
+                        </input>
+                        <input id="motion_outliers_1.Output" name="Output" description="Output directory" required="true" enabled="true" order="0" prefix="-o" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="String" cardinality="1" />
+                        </input>
+                        <input id="motion_outliers_1.Subject" name="Subject" description="List of ID numbers, used to label output" required="true" enabled="true" order="1" prefix="-S" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="String" cardinality="1" />
+                        </input>
+                        <output id="motion_outliers_1.Flowcontrol1" name="Flow control 1" required="false" enabled="true" order="3">
+                                <format type="Flow Control" cardinality="1" />
+                        </output>
+                </module>
+                <dataModule id="IDlist_1" name="ID list" posX="670" posY="29" sourceCode="" type="String" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Tue Jun 17 10:00:49 EDT 2014" />
+                        </metadata>
+                        <output id="IDlist_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="String" cardinality="1" />
+                        </output>
+                        <values>
+                                <value>70103</value>
+                                <value>YAL494504</value>
+                        </values>
+                </dataModule>
+                <dataModule id="Outputdirectory_1" name="Output directory" posX="80" posY="100" sourceCode="" type="String" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Tue Jun 17 10:01:02 EDT 2014" />
+                        </metadata>
+                        <output id="Outputdirectory_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="String" cardinality="1" />
+                        </output>
+                        <values>
+                                <value>/ifshome/ajack/ACE_ALL/ANALYSIS/INDIV_DIFF_test</value>
+                        </values>
+                </dataModule>
+                <module id="outlier_count_1" name="outlier_count" posX="178" posY="676" sourceCode="" location="pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_BIOPOINT/SCRIPTS/outlier_count.sh">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Tue Jun 24 12:34:10 EDT 2014" />
+                        </metadata>
+                        <input id="outlier_count_1.Flowcontrol" name="Flow control" required="false" enabled="true" order="1">
+                                <format type="Flow Control" cardinality="1" />
+                        </input>
+                        <input id="outlier_count_1.Outputdirectory" name="Output directory" required="true" enabled="true" order="0" prefix="-o" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="String" cardinality="1" />
+                        </input>
+                </module>
+                <module id="prep_confound_evs_1" name="prep_confound_evs" posX="488" posY="682" sourceCode="" location="pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_BIOPOINT/SCRIPTS/prep_confounds_b4_prestats.sh">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Wed Jun 25 11:54:41 EDT 2014" />
+                        </metadata>
+                        <input id="prep_confound_evs_1.Flowcontrol" name="Flow control" required="false" enabled="true" order="0">
+                                <format type="Flow Control" cardinality="1" />
+                        </input>
+                        <input id="prep_confound_evs_1.Parameterfile" name="Parameter file" required="true" enabled="true" order="1" prefix="-P" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Parameter file" extension="par" description="Motion parameters file generated by FSL's MCFLIRT" />
+                                        </fileTypes>
+                                </format>
+                        </input>
+                        <input id="prep_confound_evs_1.Subjectlist" name="Subject list" required="true" enabled="true" order="2" prefix="-S" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="String" cardinality="1" />
+                        </input>
+                        <input id="prep_confound_evs_1.Outputdirectory" name="Output directory" required="true" enabled="true" order="3" prefix="-o" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="String" cardinality="1" />
+                        </input>
+                </module>
+                <dataModule id="Motionparameters.parfile_1" name="Motion parameters (.par) file" posX="588" posY="480" sourceCode="" type="File" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Wed Jun 25 12:00:31 EDT 2014" />
+                        </metadata>
+                        <output id="Motionparameters.parfile_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="File" extension="" description="Any type of data file" />
+                                                <filetype name="Parameter file" extension="par" description="Motion parameters file generated by FSL's MCFLIRT" />
+                                        </fileTypes>
+                                </format>
+                        </output>
+                        <fileTypes>
+                                <filetype name="File" extension="" description="Any type of data file" />
+                                <filetype name="Parameter file" extension="par" description="Motion parameters file generated by FSL's MCFLIRT" />
+                        </fileTypes>
+                        <values>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/NIFTI_test/70103/ACE_70103_Faces_srs9_mcf.par</value>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/NIFTI_test/YAL494504/ACE_YAL494504_Faces_srs5_mcf.par</value>
+                        </values>
+                </dataModule>
+                <annotations visible="true">
+                        <annotation width="179" height="50" posX="483" posY="265" background="204,204,204,255" foreground="255,0,0,255" expanded="true" type="text" name="This functional image must be non-motion-corrected.&#xA;">
+                                <styles>
+                                        <style name="This functional image must be $0" fontSize="12" />
+                                        <style name="non-motion-corrected.&#xA;$30" fontSize="12" isBold="true" />
+                                </styles>
+                        </annotation>
+                </annotations>
+        </moduleGroup>
+</pipeline>
+
