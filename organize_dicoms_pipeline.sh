@@ -21,9 +21,6 @@ OPTIONS:
 EOF
 }
 
-NIFTIDIR=
-DCMDIR=
-
 #Read arguments entered by user
 while getopts "hN:D:" OPTION
 do
