@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pipeline version=".2">
+        <connections>
+                <connection source="NIfTIstring_1.Output" sink="volumes_duplicates_1.NIfTIdirectory" />
+                <connection source="Duplicatesfile_1.Output" sink="volumes_duplicates_1.Duplicatesfile" />
+                <connection source="Output_1.Output" sink="volumes_duplicates_1.Outputfile" />
+        </connections>
+        <moduleGroup id="duplicate_information_1" name="duplicate_information" posX="0" posY="0" sourceCode="">
+                <module id="volumes_duplicates_1" name="volumes_duplicates" posX="367" posY="308" sourceCode="" location="pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_FACES/SCRIPTS/volumes_duplicates.sh">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Thu May 29 14:46:14 EDT 2014" />
+                        </metadata>
+                        <input id="volumes_duplicates_1.NIfTIdirectory" name="NIfTI directory" required="true" enabled="true" order="0" prefix="-N" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="String" cardinality="1" />
+                        </input>
+                        <input id="volumes_duplicates_1.Flowcontrol" name="Flow control" required="false" enabled="false" order="3">
+                                <format type="Flow Control" cardinality="1" />
+                        </input>
+                        <input id="volumes_duplicates_1.Duplicatesfile" name="Duplicates file" required="true" enabled="true" order="1" prefix="-D" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Text file" extension="txt" description="Text file" />
+                                        </fileTypes>
+                                </format>
+                        </input>
+                        <input id="volumes_duplicates_1.Outputfile" name="Output file" required="true" enabled="true" order="2" prefix="-O" prefixSpaced="true" prefixAllArgs="false">
+                                <format type="String" cardinality="1" />
+                        </input>
+                </module>
+                <dataModule id="NIfTIstring_1" name="NIfTI string" posX="310" posY="63" sourceCode="" type="String" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Thu May 29 14:32:36 EDT 2014" />
+                        </metadata>
+                        <output id="NIfTIstring_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="String" cardinality="1" />
+                        </output>
+                        <values>
+                                <value>/ifshome/ajack/ACE_ALL/NIFTI</value>
+                        </values>
+                </dataModule>
+                <dataModule id="Output_1" name="Output" posX="488" posY="191" sourceCode="" type="String" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Fri Jan 23 11:46:49 EST 2015" />
+                        </metadata>
+                        <output id="Output_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="String" cardinality="1" />
+                        </output>
+                        <values>
+                                <value>/ifshome/ajack/ACE_ALL/NIFTI/dup_vols.txt</value>
+                        </values>
+                </dataModule>
+                <dataModule id="Duplicatesfile_1" name="Duplicates file" posX="383" posY="128" sourceCode="" type="File" source="true" loopIndex="false">
+                        <authors>
+                                <author fullName="Allison Jack" email="allison.jack@yale.edu" website="" />
+                        </authors>
+                        <tag />
+                        <metadata>
+                                <data key="__creationDateKey" value="Fri Jan 23 11:48:19 EST 2015" />
+                        </metadata>
+                        <output id="Duplicatesfile_1.Output" name="Output" required="true" enabled="true" order="-1">
+                                <format type="File" cardinality="1">
+                                        <fileTypes>
+                                                <filetype name="Text file" extension="txt" description="Text file" />
+                                        </fileTypes>
+                                </format>
+                        </output>
+                        <fileTypes>
+                                <filetype name="Text file" extension="txt" description="Text file" />
+                        </fileTypes>
+                        <values>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/NIFTI/duplicates_01-23-2015_0749.txt</value>
+                        </values>
+                </dataModule>
+        </moduleGroup>
+</pipeline>
+
