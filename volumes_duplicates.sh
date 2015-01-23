@@ -45,11 +45,17 @@ done
 printf "ID\tParadigm\tSeries\tXdim\tYdim\tZdim\tTdim\n" >> $OUTPUT
 
 tail -n +2 "$DUPS" | while read ID RUNS SEQ; do 
-  NIFTI=$NIFTIDIR/$ID/ACE_${ID}_${SEQ}_srs*.nii.gz
-  X=$(/usr/local/fsl5/bin/fslinfo $NIFTI | grep -P "^dim1" | awk '{print $2}') 
-  Y=$(/usr/local/fsl5/bin/fslinfo $NIFTI | grep -P "^dim2" | awk '{print $2}') 
-  Z=$(/usr/local/fsl5/bin/fslinfo $NIFTI | grep -P "^dim3" | awk '{print $2}') 
-  T=$(/usr/local/fsl5/bin/fslinfo $NIFTI | grep -P "^dim4" | awk '{print $2}') 
-  SRS=$(echo $NIFTI | sed 's/.*_srs\([0-9]*\).nii.gz/\1/g')
+  echo $NIFTIDIR/$ID/ACE_${ID}_${SEQ}_srs*.nii.gz | sed 's/\s/\n/g' | sed 's/\//\t/g' | awk 'BEGIN {OFS = "\t"} {print $(NF-1), $NF}' >> $NIFTIDIR/nifti_tmp.txt 
+done
+
+cat $NIFTIDIR/nifti_tmp.txt | while read ID NIFTI; do 
+  X=$(fslinfo $NIFTIDIR/$ID/$NIFTI | grep -P "^dim1" | awk '{print $2}') 
+  Y=$(fslinfo $NIFTIDIR/$ID/$NIFTI | grep -P "^dim2" | awk '{print $2}') 
+  Z=$(fslinfo $NIFTIDIR/$ID/$NIFTI | grep -P "^dim3" | awk '{print $2}') 
+  T=$(fslinfo $NIFTIDIR/$ID/$NIFTI | grep -P "^dim4" | awk '{print $2}') 
+  SRS=$(echo $NIFTI | sed 's/_/\t/g' | awk '{print $4}' | grep -o -P "\d*")
+  SEQ=$(echo $NIFTI | sed 's/_/\t/g' | awk '{print $3}')
   printf "${ID}\t${SEQ}\t${SRS}\t${X}\t${Y}\t${Z}\t${T}\n" >> $OUTPUT 
 done 
+
+rm $NIFTIDIR/nifti_tmp.txt
