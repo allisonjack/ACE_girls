@@ -12,7 +12,7 @@ This script checks for imaging sequences that were run multiple times.
 
 OPTIONS:
   -h  Show this message
-  -N  Full path to your raw NIfTI directory (will be created by this script if it doesn't already exist)
+  -N  Full path to your raw NIfTI directory (will be created by this script if it does not already exist)
   -D  Duplicates file 
   -O  Output file
    
@@ -42,12 +42,15 @@ while getopts "hN:D:O:" OPTION; do
   esac
 done
 
+#Create header for output file
 printf "ID\tParadigm\tSeries\tXdim\tYdim\tZdim\tTdim\n" >> $OUTPUT
 
+#Read info from the duplicates text file
 tail -n +2 "$DUPS" | while read ID RUNS SEQ; do 
   echo $NIFTIDIR/$ID/ACE_${ID}_${SEQ}_srs*.nii.gz | sed 's/\s/\n/g' | sed 's/\//\t/g' | awk 'BEGIN {OFS = "\t"} {print $(NF-1), $NF}' >> $NIFTIDIR/nifti_tmp.txt 
 done
 
+#Figure out number of volumes in each dimension
 cat $NIFTIDIR/nifti_tmp.txt | while read ID NIFTI; do 
   X=$(fslinfo $NIFTIDIR/$ID/$NIFTI | grep -P "^dim1" | awk '{print $2}') 
   Y=$(fslinfo $NIFTIDIR/$ID/$NIFTI | grep -P "^dim2" | awk '{print $2}') 
