@@ -43,7 +43,7 @@
                                 <format type="String" cardinality="1" />
                         </output>
                         <values>
-                                <value>/ifshome/ajack/ACE_ALL/NIFTI</value>
+                                <value>/ifshome/ajack/ACE_FACES/NIFTI</value>
                         </values>
                 </dataModule>
                 <dataModule id="Output_1" name="Output" posX="488" posY="191" sourceCode="" type="String" source="true" loopIndex="false">
@@ -58,7 +58,7 @@
                                 <format type="String" cardinality="1" />
                         </output>
                         <values>
-                                <value>/ifshome/ajack/ACE_ALL/NIFTI/dup_vols.txt</value>
+                                <value>/ifshome/ajack/ACE_FACES/NIFTI/dup_vols_1_23_15.txt</value>
                         </values>
                 </dataModule>
                 <dataModule id="Duplicatesfile_1" name="Duplicates file" posX="383" posY="128" sourceCode="" type="File" source="true" loopIndex="false">
@@ -80,7 +80,7 @@
                                 <filetype name="Text file" extension="txt" description="Text file" />
                         </fileTypes>
                         <values>
-                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_ALL/NIFTI/duplicates_01-23-2015_0749.txt</value>
+                                <value>pipeline://cranium.loni.usc.edu//ifshome/ajack/ACE_FACES/NIFTI/duplicates_01-23-2015_0749.txt</value>
                         </values>
                 </dataModule>
         </moduleGroup>
