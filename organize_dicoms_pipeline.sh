@@ -3,9 +3,9 @@
 export FSLDIR="/usr/local/fsl5"
 . /usr/local/fsl5/etc/fslconf/fsl.sh
 
-export FREESURFER_DIR="/usr/local/freesurfer-5.0.0_64bit"
-export FREESURFER_HOME="/usr/local/freesurfer-5.0.0_64bit"
-. /usr/local/freesurfer-5.0.0_64bit/FreeSurferEnv.sh
+export FREESURFER_DIR="/usr/local/freesurfer-5.3.0_64bit"
+export FREESURFER_HOME="/usr/local/freesurfer-5.3.0_64bit"
+. /usr/local/freesurfer-5.3.0_64bit/FreeSurferEnv.sh
 
 usage()
 {
@@ -76,7 +76,7 @@ IDAOUT=$NIFTIDIR/$SUBJ/$IDADIR
 mkdir -p $IDAOUT
 
 #--Convert to NIfTI files and save information about the conversion in a text file--#
-/usr/local/freesurfer-5.0.0_64bit/bin/mri_convert -it siemens_dicom -ot nii $DCMINPUT $IDAOUT/${NIFTI}.nii.gz >> $IDAOUT/info_${NIFTI}.txt
+$FREESURFER_HOME/bin/mri_convert -it siemens_dicom -ot nii $DCMINPUT $IDAOUT/${NIFTI}.nii.gz >> $IDAOUT/info_${NIFTI}.txt
 
 #--Grab series number from info file--#
 SRS=$(grep "SeriesNo" $IDAOUT/info_${NIFTI}.txt | awk '{print $2}')
